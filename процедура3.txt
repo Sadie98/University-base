@@ -1,0 +1,9 @@
+CREATE PROCEDURE Lay_off @train int
+AS   
+	DELETE FROM [Student-Section] WHERE section_id in (SELECT section_id FROM Section WHERE trainer_id=@train)
+	DELETE FROM [Private schedule] WHERE section_id in (SELECT section_id FROM Section WHERE trainer_id=@train)
+	 DELETE FROM Section WHERE trainer_id=@train
+	 DELETE FROM Trainer WHERE trainer_id=@train
+	 DELETE FROM [Trainer like]  WHERE trainer_id=@train
+	 DELETE FROM [Trainer-Section]  WHERE trainer_id=@train
+GO

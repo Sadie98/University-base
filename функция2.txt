@@ -1,0 +1,15 @@
+ALTER FUNCTION All_trainer_activity (@trainid int) RETURNS TABLE AS
+	RETURN (
+	SELECT [Section].section_id, [Trainer].surname, [Weekday].weekday, [Pair].pair, [Sport].sport_name
+	FROM [Trainer]
+	JOIN [Section]
+	ON [Trainer].trainer_id=[Section].trainer_id
+	JOIN [Weekday]
+	ON [Weekday].int_weekday=[Section].weekday
+	JOIN [Pair]
+	ON [Pair].pair=[Section].pair
+	JOIN [Sport]
+	ON [Sport].sport_id=[Section].sport_id 
+	WHERE [Section].trainer_id=@trainid
+	);
+	GO

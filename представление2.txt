@@ -1,0 +1,14 @@
+CREATE VIEW view_students
+	AS SELECT [Student].surname, [Sport].sport_name, [Weekday].weekday, [Pair].pair_time
+	FROM [Student-Section]
+	JOIN [Section]
+	ON [Student-Section].section_id=Section.section_id
+	JOIN Student
+	ON Student.card_number=[Student-Section].card_number
+	JOIN [Weekday]
+	ON [Weekday].int_weekday=Section.weekday
+	JOIN [Sport]
+	ON Sport.sport_id=Section.sport_id
+	JOIN [Pair]
+	ON Pair.pair=Section.pair
+	GO

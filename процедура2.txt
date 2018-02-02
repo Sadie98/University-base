@@ -1,0 +1,15 @@
+CREATE PROCEDURE Procedure_reschedule @sectid INT, @weekday INT, @pair int
+AS   
+	UPDATE [Section]
+	SET [Section].weekday=@weekday
+	WHERE [Section].section_id=@sectid
+	UPDATE [Section]
+	SET [Section].pair=@pair
+	WHERE [Section].section_id=@sectid
+	UPDATE [Private schedule]
+	SET [Private schedule].weekday=@weekday
+	WHERE [Private schedule].section_id=@sectid
+	UPDATE [Private schedule]
+	SET [Private schedule].pair=@pair
+	WHERE [Private schedule].section_id=@sectid
+GO

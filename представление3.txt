@@ -1,0 +1,9 @@
+ALTER VIEW view_bad_sports
+	AS SELECT Sport.sport_name,Student.surname
+	FROM Sport
+	JOIN [Sport likes]
+	ON Sport.sport_id=[Sport likes].sport_id
+	JOIN [Student]
+	ON Student.card_number=[Sport likes].card_number
+	WHERE [Sport likes].relation=0
+	GO

@@ -1,0 +1,13 @@
+ALTER TRIGGER notify
+   ON [Section]
+   AFTER UPDATE
+AS 
+BEGIN
+	SELECT Student.surname
+	FROM Student
+	JOIN [Student-Section]
+	ON Student.card_number=[Student-Section].card_number
+	JOIN [INSERTED]
+	ON [INSERTED].section_id=[Student-Section].section_id
+END
+GO

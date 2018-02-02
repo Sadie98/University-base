@@ -1,0 +1,20 @@
+
+INSERT INTO [Trainer likes]
+VALUES (224761, 1, 1)
+INSERT INTO [Trainer likes]
+VALUES (224763, 1, 0)
+
+INSERT INTO [Trainer likes]
+VALUES (224765, 2, 1)
+INSERT INTO [Trainer likes]
+VALUES (224767, 2, 0)
+
+INSERT INTO [Trainer likes]
+VALUES (224771, 3, 1)
+INSERT INTO [Trainer likes]
+VALUES (224773, 3, 0)
+
+INSERT INTO [Trainer likes]
+VALUES (224775, 4, 1)
+INSERT INTO [Trainer likes]
+VALUES (224777, 4, 0)

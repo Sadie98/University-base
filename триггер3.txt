@@ -1,0 +1,8 @@
+CREATE TRIGGER Delete_house
+   ON  [House]
+  INSTEAD OF DELETE
+AS 
+BEGIN
+	PRINT N'You can not do this'
+END
+GO

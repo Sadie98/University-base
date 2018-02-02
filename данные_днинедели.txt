@@ -1,0 +1,15 @@
+
+INSERT INTO [Weekday]
+VALUES (1, 'Monday')
+INSERT INTO [Weekday]
+VALUES (2, 'Tuesday')
+INSERT INTO [Weekday]
+VALUES (3, 'Wednesday')
+INSERT INTO [Weekday]
+VALUES (4, 'Thursday')
+INSERT INTO [Weekday]
+VALUES (5, 'Friday')
+INSERT INTO [Weekday]
+VALUES (6, 'Saturday')
+INSERT INTO [Weekday]
+VALUES (7, 'Sunday')

@@ -1,0 +1,9 @@
+CREATE FUNCTION lovely_students (@trainerid int) RETURNS TABLE AS
+	RETURN (
+	SELECT Student.surname
+	FROM Student
+	JOIN [Trainer likes]
+	ON Student.card_number=[Trainer likes].card_number
+	WHERE ([Trainer likes].trainer_id=@trainerid AND [Trainer likes].relation=1))
+GO
+

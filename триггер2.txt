@@ -1,0 +1,12 @@
+ALTER TRIGGER Paste_trainer
+   ON  [Trainer]
+   AFTER INSERT
+AS 
+BEGIN
+	DECLARE @st nvarchar(250)
+	SELECT TOP 1 @st = [INSERTED].surname FROM [INSERTED]
+	UPDATE [Trainer]
+	SET [Trainer].surname = LOWER (@st)
+	WHERE [Trainer].trainer_id in (SELECT trainer_id FROM [INSERTED]);	 
+END
+GO

@@ -1,0 +1,46 @@
+ALTER PROCEDURE Select_section_to_me @cardnum int
+AS
+	SET NOCOUNT ON; 
+
+	DECLARE @group INT;
+	SELECT @group = [Student].groip_id FROM [Student] WHERE [Student].card_number=@cardnum
+	
+	DECLARE @sect_id INT, @sport_id INT, @weekday INT, @pair INT, @house_id INT;
+	
+	DECLARE section_cursor CURSOR FOR   
+	SELECT [Section].section_id, [Section].sport_id, [Section].weekday, [Section].pair, [Section].house_id FROM [Section]
+;
+	
+	OPEN section_cursor
+
+	FETCH NEXT FROM section_cursor   
+	INTO @sect_id, @sport_id, @weekday, @pair, @house_id
+	WHILE @@FETCH_STATUS = 0  
+	BEGIN
+		DECLARE @ok INT
+		SELECT @ok = COUNT(*) FROM [Studying schedule] WHERE ([Studying schedule].group_id=@group AND [Studying schedule].weekday = @weekday AND [Studying schedule].free_pair = @pair AND ([Studying schedule].house_id = @house_id OR [Studying schedule].house_id = -1));
+		IF (@ok = 1)
+			SELECT [Weekday].weekday, [Pair].pair_time, [House].house_name, [Sport].sport_name, [Trainer].surname
+			FROM [Weekday]
+			JOIN [Section]
+			ON [Weekday].int_weekday=[Section].weekday	
+				
+			JOIN [Sport]
+			ON  [Sport].sport_id=[Section].sport_id
+			JOIN [Trainer]
+			ON [Trainer].trainer_id=[Section].trainer_id
+			JOIN [Pair]
+			ON [Pair].pair=@pair
+			JOIN [House]
+			ON [House].house_id=[Section].house_id
+			WHERE @sect_id=[Section].section_id AND [Section].weekday=@weekday AND [Pair].pair=@pair
+			FETCH NEXT FROM section_cursor   
+			INTO @sect_id, @sport_id, @weekday, @pair, @house_id
+	END
+CLOSE section_cursor;  
+DEALLOCATE section_cursor;  
+GO
+
+
+
+

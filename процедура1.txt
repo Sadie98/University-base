@@ -1,0 +1,14 @@
+CREATE PROCEDURE Procedure_enroll @stud int, @sectid int
+AS   
+	INSERT INTO [Student-Section]
+	VALUES (@stud, @sectid)
+	DECLARE @weekday INT
+	SELECT @weekday = MAX([Section].weekday) FROM [Section] WHERE [Section].section_id=@sectid
+	
+	DECLARE @pair INT
+	SELECT @pair = MAX([Section].pair) FROM [Section] WHERE [Section].section_id=@sectid
+
+	INSERT INTO [Private schedule]
+	VALUES (@stud, @weekday, @pair, @sectid)
+
+GO

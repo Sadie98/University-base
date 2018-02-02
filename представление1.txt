@@ -1,0 +1,14 @@
+ALTER VIEW view_gyms
+ AS SELECT [Section].section_id, [House].house_name, [Sport].sport_name, [Trainer].surname, [Weekday].weekday, [Pair].pair_time
+ FROM Section
+ JOIN House
+ ON Section.house_id=House.house_id
+ JOIN Sport
+ ON Sport.sport_id=Section.sport_id
+ JOIN Trainer
+ ON Trainer.trainer_id=Section.trainer_id
+ JOIN [Weekday]
+ ON [Weekday].int_weekday=Section.weekday
+ JOIn Pair
+ ON Pair.pair=Section.pair
+ GO

@@ -1,0 +1,8 @@
+INSERT INTO [Trainer]
+VALUES (1, 'Dogensky')
+INSERT INTO [Trainer]
+VALUES (2, 'Corgachev')
+INSERT INTO [Trainer]
+VALUES (3, 'Pesov')
+INSERT INTO [Trainer]
+VALUES (4, 'Sobakenov')

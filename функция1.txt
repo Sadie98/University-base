@@ -1,0 +1,18 @@
+ALTER FUNCTION Select_section (@sect int) RETURNS TABLE AS
+	RETURN (
+	SELECT [Student-Section].section_id,[Student].surname, [Sport].sport_name, [Weekday].weekday, [Pair].pair_time
+	FROM [Student]
+	JOIN [Student-Section] 
+	ON [Student].card_number=[Student-Section].card_number
+	JOIN [Section]
+	ON [Section].section_id=[Student-Section].section_id
+	JOIN [Sport]
+	ON [Sport].sport_id=[Section].sport_id
+	JOIN [Weekday]
+	ON [Weekday].int_weekday=[Section].weekday
+	JOIN [Pair]
+	ON [Pair].pair=[Section].pair
+	WHERE [Student-Section].section_id=@sect
+	);
+GO
+

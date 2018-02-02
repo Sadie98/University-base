@@ -1,0 +1,144 @@
+CREATE TABLE "Private schedule" (
+	"card_number" INT,
+	"weekday" INT,
+	"pair" INT,
+	"section_id" INT,
+	PRIMARY KEY ("card_number"),
+	SET IDentity_Insert off
+)
+
+CREATE TABLE "Weekday" (
+	"int_weekday" INT,
+	"weekday" TEXT,
+	PRIMARY KEY ("int_weekday"),
+	SET IDentity_Insert off
+)
+
+CREATE TABLE "Student" (
+	"card_number" INT,
+	"groip_id" INT,
+	"surname" VARCHAR(255),
+	PRIMARY KEY ("card_number"),
+	SET IDentity_Insert off
+)
+
+CREATE TABLE "Student-Section" (
+	"card_number" INT,
+	"section_id" INT,
+	SET IDentity_Insert off
+)
+
+CREATE TABLE "Group" (
+	"group_id" INT,
+	"group_number" VARCHAR(255),
+	PRIMARY KEY ("group_id"),
+	SET IDentity_Insert off
+)
+
+CREATE TABLE "Studying schedule" (
+	"group_id" INT,
+	"weekday" INT,
+	"free_pair" INT,
+	"house_id" INT,
+	PRIMARY KEY ("group_id"),
+	SET IDentity_Insert off
+)
+
+CREATE TABLE "Pair" (
+	"pair" INT ,
+	"pair_time" VARCHAR(255),
+	PRIMARY KEY ("pair"),
+	SET IDentity_Insert off
+)
+
+CREATE TABLE "Section" (
+	"section_id" INT,
+	"sport_id" INT,
+	"weekday" INT,
+	"pair" INT,
+	"trainer_id" INT,
+	"house_id" INT,
+	SET IDentity_Insert off
+)
+
+CREATE TABLE "House" (
+	"house_id" INT,
+	"house_name" VARCHAR(255),
+	PRIMARY KEY ("house_id"),
+	SET IDentity_Insert off
+)
+
+CREATE TABLE "Sport likes" (
+	"card_number" INT,
+	"sport_id" INT,
+	"relation" BOOLEAN,
+	SET IDentity_Insert off
+)
+
+CREATE TABLE "Trainer likes" (
+	"card_number" INT,
+	"trainer_id" INT,
+	"relation" INT,
+	SET IDentity_Insert off
+)
+
+CREATE TABLE "Trainer" (
+	"trainer_id" INT,
+	"surname" VARCHAR(255),
+	PRIMARY KEY ("trainer_id")
+)
+
+CREATE TABLE "Trainer-Section" (
+	"trainer_id" INT,
+	"section_id" INT,
+	SET IDentity_Insert off
+)
+
+CREATE TABLE "Sport" (
+	"sport_id" INT,
+	"sport_name" VARCHAR(255),
+	PRIMARY KEY ("sport_id"),
+	SET IDentity_Insert off
+)
+
+ALTER TABLE "Private schedule" ADD CONSTRAINT "Private schedule_fk0" FOREIGN KEY ("card_number") REFERENCES "Student"("card_number") 
+ON DELETE CASCADE
+
+ALTER TABLE "Private schedule" ADD CONSTRAINT "Private schedule_fk1" FOREIGN KEY ("weekday") REFERENCES "Weekday"("int_weekday") 
+ON DELETE CASCADE
+
+ALTER TABLE "Student" ADD CONSTRAINT "Student_fk0" FOREIGN KEY ("groip_id") REFERENCES "Group"("group_id") 
+ON DELETE CASCADE
+
+ALTER TABLE "Student-Section" ADD CONSTRAINT "Student-Section_fk0" FOREIGN KEY ("card_number") REFERENCES "Student"("card_number") 
+ON DELETE CASCADE
+
+ALTER TABLE "Student-Section" ADD CONSTRAINT "Student-Section_fk1" FOREIGN KEY ("section_id") REFERENCES "Section"("section_id") 
+ON DELETE CASCADE
+
+ALTER TABLE "Group" ADD CONSTRAINT "Group_fk0" FOREIGN KEY ("group_id") REFERENCES "Studying schedule"("group_id") 
+ON DELETE CASCADE
+
+ALTER TABLE "Studying schedule" ADD CONSTRAINT "Studying schedule_fk0" FOREIGN KEY ("weekday") REFERENCES "Weekday"("int_weekday") 
+ON DELETE CASCADE
+
+ALTER TABLE "Studying schedule" ADD CONSTRAINT "Studying schedule_fk1" FOREIGN KEY ("free_pair") REFERENCES "Pair"("pair") 
+ON DELETE CASCADE
+
+ALTER TABLE "Studying schedule" ADD CONSTRAINT "Studying schedule_fk2" FOREIGN KEY ("house_id") REFERENCES "House"("house_id") 
+ON DELETE CASCADE
+
+ALTER TABLE "Section" ADD CONSTRAINT "Section_fk0" FOREIGN KEY ("sport_id") REFERENCES "Sport"("sport_id") 
+ON DELETE CASCADE
+
+ALTER TABLE "Sport likes" ADD CONSTRAINT "Sport likes_fk0" FOREIGN KEY ("card_number") REFERENCES "Student"("card_number") 
+ON DELETE CASCADE
+
+ALTER TABLE "Trainer likes" ADD CONSTRAINT "Trainer likes_fk0" FOREIGN KEY ("card_number") REFERENCES "Student"("card_number") 
+ON DELETE CASCADE
+
+ALTER TABLE "Trainer-Section" ADD CONSTRAINT "Trainer-Section_fk0" FOREIGN KEY ("trainer_id") REFERENCES "Trainer"("trainer_id") 
+ON DELETE CASCADE
+
+ALTER TABLE "Trainer-Section" ADD CONSTRAINT "Trainer-Section_fk1" FOREIGN KEY ("section_id") REFERENCES "Section"("section_id") 
+ON DELETE CASCADE
